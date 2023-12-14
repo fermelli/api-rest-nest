@@ -1,73 +1,113 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Curso de desarrollo de API REST con NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Objetivo del curso
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+El curso tiene como objetivo principal proporcionar a los participantes las habilidades necesarias para desarrollar una API REST robusta utilizando Nest.js. Al finalizar el curso, los participantes serán capaces de crear, gestionar una API REST que cumpla con los estándares de desarrollo modernos.
 
-## Description
+## Explicación de la API a desarrollar
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Diagrama Entidad Relación
 
-## Installation
+![Diagrama Entidad Relación](./pic.png)
+
+### ¿Qué funcionalidades tendrá la API?
+
+En este curso, desarrollaremos una API REST para abordar los siguientes requisitos:
+Permitir la gestión de campañas de marketing de una empresa. Cualquier usuario (vendedor) puede crear una campaña de marketing y será el responsable de la gestión de sus estados: pendiente, en proceso, finalizada, cancelada, etc. Las campañas pueden tener diferentes etiquetas (tags) que permitan clasificarlas por su interés.
+
+Los vendedores (usuarios) puedan gestionar sus contactos (clientes) a los que se les puede asignar etiquetas (tags) que permitan clasificarlos de acuerdo a sus intereses. Las campañas de marketing son dirigidas a contactos que tengan una o más etiquetas (tags) en común con la campaña de marketing de forma automática cuando la campaña esté en estado en proceso.
+
+Los usuarios realizarán el seguimiento de las campañas de marketing que les han sido asignadas a sus contactos. Para ello, podrán registrar la acción que han realizado con cada contacto (cliente) de la campaña. Estas acciones pueden ser: llamada telefónica, correo electrónico, mensaje de texto, la fecha en la que se realizó la acción y el resultado de la acción: pendiente, exitosa, fallida y sin respuesta. Todo esto mientras la campaña esté en proceso.
+
+Luego de finalizar la campaña, se podrán generar reportes que permitan analizar el resultado de la campaña de marketing. Los reportes pueden ser: cantidad de contactos que se han contactado, cantidad de contactos que han respondido, cantidad de contactos que han comprado, vendedores que han participado en la campaña, vendedores que han tenido más éxito en la campaña, vendedores que han tenido menos éxito en la campaña, etc.
+
+### ¿Qué recursos tendrá la API?
+
+| Recurso                     | Campos                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Usuario                     | nombre, contraseña, correo electrónico, fecha de creación, fecha de actualización, fecha de eliminación                                                      |
+| Contacto                    | nombres, apellidos, teléfono o celular, correo electrónico, dirección, fecha de creación, fecha de actualización, fecha de eliminación                       |
+| Etiqueta                    | nombre, color, fecha de creación                                                                                                                             |
+| Campaña                     | nombre, descripción, banner, estado (pendiente, en proceso, finalizada, cancelada), fecha de inicio, fecha de fin, fecha de creación, fecha de actualización |
+| Acción (Campaña - Contacto) | tipo de accion (llamada telefónica, correo electrónico, mensaje de texto), fecha de acción, resultado de la acción, fecha de creación                        |
+
+### ¿Qué relaciones tendrán los recursos?
+
+#### Usuario
+
+- Un usuario tiene ninguno o muchos contactos
+- Un usuario tiene muchas campañas
+
+#### Contacto
+
+- Un contacto pertenece a un usuario
+- Un contacto tiene ninguna o muchas etiquetas
+- Un contacto puede ser asignado a ninguna o muchas campañas
+
+#### Etiqueta
+
+- Una etiqueta pertenece a ninguno o muchos contactos
+- Una etiqueta pertenece a ninguna o muchas campañas
+
+#### Campaña
+
+- Una campaña pertenece a un usuario
+- Una campaña tiene ninguna o muchas etiquetas
+- Una campaña tiene se asigna a ninguno o muchos contactos
+
+#### Acción (Campaña - Contacto)
+
+- Una acción pertenece a - un contacto
+- Una acción pertenece a una campaña
+
+## Configuración del Entorno de Desarrollo
+
+- Node.js y npm
+- MySQL (Laragon)
+- Postman
+- Git (opcional)
+- VS Code
+  - Configuraciones recomendadas - [settings.json](./settings.json)
+  - Extensiones recomendadas - [extensions.json](./extensions.json)
+
+## Instalación de Dependencias
 
 ```bash
 $ yarn install
 ```
 
-## Running the app
+o con npm
 
 ```bash
-# development
+$ npm install
+```
+
+## Ejecución de la aplicación
+
+```bash
+# desarrollo
 $ yarn run start
 
-# watch mode
+# modo observador
 $ yarn run start:dev
 
-# production mode
+# modo producción
 $ yarn run start:prod
 ```
 
-## Test
+o con npm
 
 ```bash
-# unit tests
-$ yarn run test
+# desarrollo
+$ npm run start
 
-# e2e tests
-$ yarn run test:e2e
+# modo observador
+$ npm run start:dev
 
-# test coverage
-$ yarn run test:cov
+# modo producción
+$ npm run start:prod
 ```
 
-## Support
+## Autor
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+[fermelli](https://github.com/fermelli)
