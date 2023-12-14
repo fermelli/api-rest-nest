@@ -67,8 +67,8 @@ Luego de finalizar la campaña, se podrán generar reportes que permitan analiza
 - Postman
 - Git (opcional)
 - VS Code
-  - Configuraciones recomendadas - [settings.json](./settings.json)
-  - Extensiones recomendadas - [extensions.json](./extensions.json)
+  - Configuraciones recomendadas - [settings.json](./.vscode/settings.json)
+  - Extensiones recomendadas - [extensions.json](./.vscode/extensions.json)
 
 ## Instalación de Dependencias
 
