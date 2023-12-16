@@ -9,6 +9,7 @@ import { UpdateCampanaDto } from './dto/update-campana.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Equal, Repository } from 'typeorm';
 import { Campana } from './entities/campana.entity';
+import { Estados } from './estados.enum';
 
 @Injectable()
 export class CampanasService {
@@ -21,7 +22,10 @@ export class CampanasService {
 
   async create(createCampanaDto: CreateCampanaDto) {
     try {
-      const campana = this.campanasRepository.create(createCampanaDto);
+      const campana = this.campanasRepository.create({
+        estado: Estados.PENDIENTE,
+        ...createCampanaDto,
+      });
 
       await this.campanasRepository.save(campana);
 

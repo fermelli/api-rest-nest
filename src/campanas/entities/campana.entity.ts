@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { estadosArray } from '../estados.enum';
 
 @Entity('campanas')
 export class Campana {
@@ -19,6 +20,14 @@ export class Campana {
 
   @Column({ name: 'banner', type: 'varchar', length: 255, nullable: true })
   banner: string;
+
+  @Column({
+    name: 'estado',
+    type: 'enum',
+    enum: estadosArray,
+    default: 'pendiente',
+  })
+  estado: string;
 
   @Column({ name: 'fecha_inicio', type: 'date' })
   fechaInicio: Date;

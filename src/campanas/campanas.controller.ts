@@ -17,8 +17,6 @@ export class CampanasController {
 
   @Post()
   create(@Body() createCampanaDto: CreateCampanaDto) {
-    console.log({ createCampanaDto });
-
     return this.campanasService.create(createCampanaDto);
   }
 
