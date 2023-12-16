@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ContactosModule } from './contactos/contactos.module';
 
 @Module({
   imports: [
@@ -17,8 +18,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'api-rest-nest',
       synchronize: true,
       autoLoadEntities: true,
+      logging: true,
     }),
     UsuariosModule,
+    ContactosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
