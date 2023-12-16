@@ -501,6 +501,38 @@
 			]
 		},
 		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Registrarse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"{{$randomUserName}}\",\r\n  \"correoElectronico\": \"{{$randomEmail}}\",\r\n  \"password\": \"Password123$\",\r\n  \"passwordConfirmacion\": \"Password123$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/autenticacion/registrarse",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"registrarse"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Hello World!",
 			"request": {
 				"method": "GET",
