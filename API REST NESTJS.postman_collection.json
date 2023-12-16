@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4e583d7b-f563-4ed8-949d-cec971a41eac",
+		"_postman_id": "0005eb6f-7f77-48ec-b5ef-183c134f4662",
 		"name": "API REST NESTJS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23398434",
-		"_collection_link": "https://martian-equinox-531321.postman.co/workspace/Team-Workspace~c3a1dd85-3f13-4bcf-8495-87a269f3a38e/collection/23398434-4e583d7b-f563-4ed8-949d-cec971a41eac?action=share&source=collection_link&creator=23398434"
+		"_exporter_id": "8046053"
 	},
 	"item": [
 		{
@@ -142,6 +141,25 @@
 								"usuarios",
 								"1",
 								"desactivar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/usuarios/1/activar",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios",
+								"1",
+								"activar"
 							]
 						}
 					},
@@ -372,23 +390,115 @@
 			]
 		},
 		{
-			"name": "Restore Usuario",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"url": {
-					"raw": "{{api_url}}/usuarios/1/activar",
-					"host": [
-						"{{api_url}}"
-					],
-					"path": [
-						"usuarios",
-						"1",
-						"activar"
-					]
+			"name": "Etiquetas",
+			"item": [
+				{
+					"name": "FindAll Etiquetas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/etiquetas",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"etiquetas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Etiqueta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomWord}}\",\r\n    \"color\": \"{{$randomHexColor}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/etiquetas",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"etiquetas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Etiqueta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/etiquetas/4",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"etiquetas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Etiqueta",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomWord}}\",\r\n    \"color\": \"{{$randomHexColor}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/etiquetas/5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"etiquetas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Etiqueta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/etiquetas/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"etiquetas",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "Hello World!",

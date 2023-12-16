@@ -6,6 +6,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ContactosModule } from './contactos/contactos.module';
 import { CampanasModule } from './campanas/campanas.module';
+import { EtiquetasModule } from './etiquetas/etiquetas.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CampanasModule } from './campanas/campanas.module';
     UsuariosModule,
     ContactosModule,
     CampanasModule,
+    EtiquetasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
