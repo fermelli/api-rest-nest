@@ -16,7 +16,8 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       exceptionFactory: (errors) => {
-        console.log('%O', errors);
+        console.log(errors);
+
         const mensajesErrores = {};
 
         errors.forEach((error) => {

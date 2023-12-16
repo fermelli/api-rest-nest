@@ -7,7 +7,7 @@ import {
 import { CreateContactoDto } from './dto/create-contacto.dto';
 import { UpdateContactoDto } from './dto/update-contacto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Equal, Repository } from 'typeorm';
 import { Contacto } from './entities/contacto.entity';
 
 @Injectable()
@@ -39,8 +39,7 @@ export class ContactosService {
 
   async findOne(id: number) {
     const contacto = await this.contactosRepository.findOne({
-      where: { id },
-      withDeleted: true,
+      where: { id: Equal(id) },
     });
 
     if (!contacto) {

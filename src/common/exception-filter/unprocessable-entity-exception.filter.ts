@@ -13,8 +13,6 @@ export class UnprocessableEntityExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const codigoEstado = exception.getStatus();
 
-    console.log('%O', exception);
-
     response.status(codigoEstado).json({
       statusCode: codigoEstado,
       error: exception.message,

@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "4e583d7b-f563-4ed8-949d-cec971a41eac",
+		"name": "API REST NESTJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23398434",
+		"_collection_link": "https://martian-equinox-531321.postman.co/workspace/Team-Workspace~c3a1dd85-3f13-4bcf-8495-87a269f3a38e/collection/23398434-4e583d7b-f563-4ed8-949d-cec971a41eac?action=share&source=collection_link&creator=23398434"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "FindAll Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/usuarios?withDeleted=true",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "withDeleted",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomUserName}}\",\r\n    \"password\": \"{{$randomPassword}}123$\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/usuarios?withDeleted=0",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "withDeleted",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/usuarios/4",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomUserName}}\",\r\n    \"password\": \"{{$randomPassword}}123$\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/usuarios/5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/usuarios/10",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SoftRemove Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/usuarios/1/desactivar",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"usuarios",
+								"1",
+								"desactivar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contactos",
+			"item": [
+				{
+					"name": "FindAll Contactos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/contactos",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"contactos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contacto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/contactos",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"contactos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Contacto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/contactos/4",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"contactos",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contacto",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/contactos/5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"contactos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Contacto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/contactos/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"contactos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Campañas",
+			"item": [
+				{
+					"name": "FindAll Campañas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Campaña",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/16\",\r\n    \"fechaFin\": \"2024/01/30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/campanas",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Campaña",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas/4",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Campaña",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/16\",\r\n    \"fechaFin\": \"2024/01/30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/campanas/5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Campaña",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restore Usuario",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/usuarios/1/activar",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"usuarios",
+						"1",
+						"activar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hello World!",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "localhost:3000/api",
+			"type": "string"
+		}
+	]
+}
