@@ -30,7 +30,7 @@ export class CampanaContacto {
   })
   tipoAccion?: TiposAccion;
 
-  @Column({ name: 'fecha_inicio', type: 'date', nullable: true })
+  @Column({ name: 'fecha_accion', type: 'date', nullable: true })
   fechaAccion?: Date;
 
   @Column({

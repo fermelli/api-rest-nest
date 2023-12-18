@@ -122,6 +122,10 @@ export class CampanasService {
       throw new BadRequestException('La campaña no esta pendiente');
     }
 
+    if (campana.fechaFin < new Date()) {
+      throw new BadRequestException('La fecha de fin ya paso');
+    }
+
     const contactosConEtiquetas = await this.contactosRepository.find({
       where: {
         etiquetas: {
@@ -162,9 +166,6 @@ export class CampanasService {
   async cancelar(id: number) {
     const campana = await this.campanasRepository.findOne({
       where: { id: Equal(id) },
-      relations: {
-        campanasContactos: true,
-      },
     });
 
     if (!campana) {
@@ -189,9 +190,6 @@ export class CampanasService {
   async finalizar(id: number) {
     const campana = await this.campanasRepository.findOne({
       where: { id: Equal(id) },
-      relations: {
-        campanasContactos: true,
-      },
     });
 
     if (!campana) {
