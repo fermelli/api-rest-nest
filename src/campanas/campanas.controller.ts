@@ -10,6 +10,7 @@ import {
 import { CampanasService } from './campanas.service';
 import { CreateCampanaDto } from './dto/create-campana.dto';
 import { UpdateCampanaDto } from './dto/update-campana.dto';
+import { DarSeguimientoCampanaContactoDto } from './dto/dar-seguimiento-campana-contacto.dto';
 
 @Controller('campanas')
 export class CampanasController {
@@ -61,5 +62,18 @@ export class CampanasController {
     @Param('usuarioId') usuarioId: string,
   ) {
     return this.campanasService.obtenerContactosDeUsuario(+id, +usuarioId);
+  }
+
+  @Patch('campana-contacto/:id/usuarios/:usuarioId')
+  darSeguimientoCampanaContacto(
+    @Param('id') id: string,
+    @Param('usuarioId') usuarioId: string,
+    @Body() darSeguimientoCampanaContacto: DarSeguimientoCampanaContactoDto,
+  ) {
+    return this.campanasService.darSeguimientoCampanaContacto(
+      +id,
+      +usuarioId,
+      darSeguimientoCampanaContacto,
+    );
   }
 }

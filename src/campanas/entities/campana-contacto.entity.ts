@@ -9,6 +9,7 @@ import {
 import { TiposAccion } from '../tipo-accion.enum';
 import { Campana } from './campana.entity';
 import { Contacto } from 'src/contactos/entities/contacto.entity';
+import { ResultadosAccion } from '../resultado-accion.enum';
 
 @Entity('campana_contacto')
 export class CampanaContacto {
@@ -34,11 +35,11 @@ export class CampanaContacto {
 
   @Column({
     name: 'resultado_accion',
-    type: 'varchar',
-    length: 100,
-    nullable: true,
+    type: 'enum',
+    enum: ResultadosAccion,
+    default: ResultadosAccion.PENDIENTE,
   })
-  resultadoAccion?: string;
+  resultadoAccion?: ResultadosAccion;
 
   @CreateDateColumn({
     name: 'creado_en',

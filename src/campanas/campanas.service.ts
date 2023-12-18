@@ -12,6 +12,8 @@ import { Campana } from './entities/campana.entity';
 import { Estados } from './estados.enum';
 import { Contacto } from 'src/contactos/entities/contacto.entity';
 import { CampanaContacto } from './entities/campana-contacto.entity';
+import { DarSeguimientoCampanaContactoDto } from './dto/dar-seguimiento-campana-contacto.dto';
+import { ResultadosAccion } from './resultado-accion.enum';
 
 @Injectable()
 export class CampanasService {
@@ -229,5 +231,60 @@ export class CampanasService {
     });
 
     return contactos;
+  }
+
+  async darSeguimientoCampanaContacto(
+    id: number,
+    usuarioId: number,
+    darSeguimientoCampanaContactoDto: DarSeguimientoCampanaContactoDto,
+  ) {
+    const campanaContacto = await this.campanasContactosRepository.findOne({
+      where: { id: Equal(id) },
+      relations: {
+        campana: true,
+        contacto: {
+          usuario: true,
+        },
+      },
+    });
+
+    if (!campanaContacto) {
+      throw new NotFoundException(
+        `Campaña contacto con id ${id} no encontrado`,
+      );
+    }
+
+    if (campanaContacto.campana.estado !== Estados.EN_PROCESO) {
+      throw new BadRequestException('La campaña no esta en proceso');
+    }
+
+    if (campanaContacto.campana.fechaInicio > new Date()) {
+      throw new BadRequestException('La campaña no ha iniciado');
+    }
+
+    if (campanaContacto.campana.fechaFin < new Date()) {
+      throw new BadRequestException('La campaña ha finalizado');
+    }
+
+    if (campanaContacto.contacto.usuario.id !== usuarioId) {
+      throw new BadRequestException('El contacto no pertenece al usuario');
+    }
+
+    if (campanaContacto.resultadoAccion !== ResultadosAccion.PENDIENTE) {
+      throw new BadRequestException('El seguimiento ya fue realizado');
+    }
+
+    try {
+      campanaContacto.tipoAccion = darSeguimientoCampanaContactoDto.tipoAccion;
+      campanaContacto.resultadoAccion =
+        darSeguimientoCampanaContactoDto.resultadoAccion;
+      campanaContacto.fechaAccion = new Date();
+
+      await this.campanasContactosRepository.save(campanaContacto);
+
+      return campanaContacto;
+    } catch (error) {
+      this.manejadorError(error);
+    }
   }
 }
