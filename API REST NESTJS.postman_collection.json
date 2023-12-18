@@ -194,7 +194,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"daa\": \"etiqutanueva\",\r\n            \"ff\": \"#2b3a1a\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"system\",\r\n            \"color\": \"#4a1d2f\",\r\n            \"creadoEn\": \"2023-12-18T02:22:14.607Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"nombre\": \"Agent\",\r\n            \"color\": \"#230e7f\",\r\n            \"creadoEn\": \"2023-12-18T02:30:39.706Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/16\",\r\n    \"fechaFin\": \"2024/01/30\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Technician\",\r\n            \"color\": \"#2b4c15\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"orchid\",\r\n            \"color\": \"#524f17\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"#524f17\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/31\",\r\n    \"fechaFin\": \"2024/01/30\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"system\",\r\n            \"color\": \"#4a1d2f\",\r\n            \"creadoEn\": \"2023-12-18T02:22:14.607Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"nombre\": \"Agent\",\r\n            \"color\": \"#230e7f\",\r\n            \"creadoEn\": \"2023-12-18T02:30:39.706Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -388,19 +388,57 @@
 					"response": []
 				},
 				{
-					"name": "Activar Campaña",
+					"name": "Iniciar Campaña",
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/campanas/7/iniciar",
+							"raw": "{{api_url}}/campanas/9/iniciar",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"campanas",
-								"7",
+								"9",
 								"iniciar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Campaña",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas/3/cancelar",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"3",
+								"cancelar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finalizar Campaña",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas/5/finalizar",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"5",
+								"finalizar"
 							]
 						}
 					},
