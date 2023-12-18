@@ -47,6 +47,7 @@ export class AutenticacionService {
   private async obtenerJwtToken(usuario: Usuario) {
     const payload = {
       sub: usuario.id,
+      id: usuario.id,
       nombre: usuario.nombre,
       correoElectronico: usuario.correoElectronico,
     };
