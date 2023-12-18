@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "0005eb6f-7f77-48ec-b5ef-183c134f4662",
+		"_postman_id": "bf1bbf9a-6bc7-4af2-a089-107c55b3b4a5",
 		"name": "API REST NESTJS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8046053"
+		"_exporter_id": "23398434",
+		"_collection_link": "https://martian-equinox-531321.postman.co/workspace/Team-Workspace~c3a1dd85-3f13-4bcf-8495-87a269f3a38e/collection/23398434-bf1bbf9a-6bc7-4af2-a089-107c55b3b4a5?action=share&source=collection_link&creator=23398434"
 	},
 	"item": [
 		{
@@ -15,7 +16,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/usuarios?withDeleted=true",
+							"raw": "{{api_url}}/usuarios?withDeleted=false",
 							"host": [
 								"{{api_url}}"
 							],
@@ -25,7 +26,7 @@
 							"query": [
 								{
 									"key": "withDeleted",
-									"value": "true"
+									"value": "false"
 								}
 							]
 						}
@@ -39,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"{{$randomUserName}}\",\r\n    \"password\": \"{{$randomPassword}}123$\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"{{$randomUserName}}\",\r\n    \"password\": \"Password123$\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,7 +195,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"system\",\r\n            \"color\": \"#4a1d2f\",\r\n            \"creadoEn\": \"2023-12-18T02:22:14.607Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"nombre\": \"Agent\",\r\n            \"color\": \"#230e7f\",\r\n            \"creadoEn\": \"2023-12-18T02:30:39.706Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"usuarioId\": 2,\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"system\",\r\n            \"color\": \"#4a1d2f\",\r\n            \"creadoEn\": \"2023-12-18T02:22:14.607Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"nombre\": \"Agent\",\r\n            \"color\": \"#230e7f\",\r\n            \"creadoEn\": \"2023-12-18T02:30:39.706Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -393,13 +394,13 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/campanas/9/iniciar",
+							"raw": "{{api_url}}/campanas/1/iniciar",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"campanas",
-								"9",
+								"1",
 								"iniciar"
 							]
 						}
@@ -450,7 +451,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/campanas/1/contactos/usuarios/1",
+							"raw": "{{api_url}}/campanas/1/contactos/usuarios/2",
 							"host": [
 								"{{api_url}}"
 							],
@@ -458,6 +459,36 @@
 								"campanas",
 								"1",
 								"contactos",
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DarSeguimientoCampanaContacto Campañana",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoAccion\": \"llamada\",\r\n    \"resultadoAccion\": \"exitosa\",\r\n    \"fechaAccion\": \"2023/12/18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/campanas/campana-contacto/2/usuarios/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"campana-contacto",
+								"2",
 								"usuarios",
 								"1"
 							]
@@ -579,6 +610,83 @@
 			]
 		},
 		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Iniciar Sesión",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\": \"Sandra34@yahoo.com\",\r\n    \"password\": \"Password123$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/autenticacion/iniciar-sesion",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"iniciar-sesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrarse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"{{$randomUserName}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"password\": \"Password123$\",\r\n    \"passwordConfirmacion\": \"Password123$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/autenticacion/registrarse",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"registrarse"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario Autenticado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/autenticacion/usuario-autenticado",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"usuario-autenticado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Hello World!",
 			"request": {
 				"method": "GET",
@@ -597,6 +705,16 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsIm5vbWJyZSI6Ik5pY29sYXMuR2F5bG9yZCIsImNvcnJlb0VsZWN0cm9uaWNvIjoiSmF5bG9uLld5bWFuQGhvdG1haWwuY29tIiwiaWF0IjoxNzAyOTI1NTE5LCJleHAiOjE3MDI5Mzk5MTl9.mbYais7JVh6zRY_ZvOayqcTAtE4Y8SFTyLtT7RJoe14",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
