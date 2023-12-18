@@ -443,6 +443,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ObtenerContactosDeUsuario Campaña",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas/1/contactos/usuarios/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"1",
+								"contactos",
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
