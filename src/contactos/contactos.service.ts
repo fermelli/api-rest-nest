@@ -20,6 +20,7 @@ export class ContactosService {
   ) {}
 
   async create(createContactoDto: CreateContactoDto) {
+    console.log(createContactoDto);
     try {
       const contacto = this.contactosRepository.create(createContactoDto);
 
@@ -40,6 +41,9 @@ export class ContactosService {
   async findOne(id: number) {
     const contacto = await this.contactosRepository.findOne({
       where: { id: Equal(id) },
+      relations: {
+        usuario: true,
+      },
     });
 
     if (!contacto) {

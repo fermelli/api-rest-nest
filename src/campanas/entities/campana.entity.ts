@@ -2,10 +2,18 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { estadosArray } from '../estados.enum';
+import { Estados, estadosArray } from '../estados.enum';
+import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { Etiqueta } from 'src/etiquetas/entities/etiqueta.entity';
+import { CampanaContacto } from './campana-contacto.entity';
 
 @Entity('campanas')
 export class Campana {
@@ -27,7 +35,7 @@ export class Campana {
     enum: estadosArray,
     default: 'pendiente',
   })
-  estado: string;
+  estado: Estados;
 
   @Column({ name: 'fecha_inicio', type: 'date' })
   fechaInicio: Date;
@@ -48,4 +56,28 @@ export class Campana {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   actualizadoEn: Date;
+
+  @Column({ name: 'usuario_id', type: 'int' })
+  usuarioId: number;
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.campanas, { nullable: false })
+  @JoinColumn({ name: 'usuario_id' })
+  usuario: Usuario;
+
+  @ManyToMany(() => Etiqueta, (etiqueta) => etiqueta.campanas, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'campana_etiqueta',
+    joinColumn: { name: 'campana_id' },
+    inverseJoinColumn: { name: 'etiqueta_id' },
+  })
+  etiquetas: Etiqueta[];
+
+  @OneToMany(
+    () => CampanaContacto,
+    (campanaContacto) => campanaContacto.campana,
+    { cascade: true },
+  )
+  campanasContactos: CampanaContacto[];
 }

@@ -1,6 +1,9 @@
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
+  ArrayMinSize,
+  IsArray,
   IsDate,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -39,4 +42,13 @@ export class CreateCampanaDto {
   @IsDate({ message: 'La fecha de fin debe ser una fecha válida' })
   @MinDate(new Date(new Date().setHours(0, 0, 0, 0)))
   fechaFin: Date;
+
+  @Type(() => Number)
+  @IsNotEmpty({ message: 'El id de usuario es requerido' })
+  @IsInt({ message: 'El id de usuario debe ser un número entero' })
+  usuarioId: number;
+
+  @IsArray({ message: 'Las etiquetas deben ser un arreglo' })
+  @ArrayMinSize(1, { message: 'Debe tener al menos una etiqueta' })
+  etiquetas: any[];
 }

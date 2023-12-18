@@ -1,7 +1,11 @@
+import { Campana } from 'src/campanas/entities/campana.entity';
+import { Contacto } from 'src/contactos/entities/contacto.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,4 +26,20 @@ export class Etiqueta {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   creadoEn: Date;
+
+  @ManyToMany(() => Contacto, (contacto) => contacto.etiquetas)
+  @JoinTable({
+    name: 'contacto_etiqueta',
+    joinColumn: { name: 'etiqueta_id' },
+    inverseJoinColumn: { name: 'contacto_id' },
+  })
+  contactos: Contacto[];
+
+  @ManyToMany(() => Campana, (campana) => campana.etiquetas)
+  @JoinTable({
+    name: 'campana_etiqueta',
+    joinColumn: { name: 'etiqueta_id' },
+    inverseJoinColumn: { name: 'campana_id' },
+  })
+  campanas: Campana[];
 }

@@ -1,8 +1,11 @@
+import { Campana } from 'src/campanas/entities/campana.entity';
+import { Contacto } from 'src/contactos/entities/contacto.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -46,4 +49,14 @@ export class Usuario {
     nullable: true,
   })
   eliminadoEn: Date;
+
+  @OneToMany(() => Contacto, (contacto) => contacto.usuario, {
+    nullable: false,
+  })
+  contactos: Contacto[];
+
+  @OneToMany(() => Campana, (campana) => campana.usuario, {
+    nullable: false,
+  })
+  campanas: Campana[];
 }

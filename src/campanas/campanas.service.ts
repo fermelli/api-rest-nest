@@ -7,9 +7,11 @@ import {
 import { CreateCampanaDto } from './dto/create-campana.dto';
 import { UpdateCampanaDto } from './dto/update-campana.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Repository } from 'typeorm';
+import { Equal, In, Repository } from 'typeorm';
 import { Campana } from './entities/campana.entity';
 import { Estados } from './estados.enum';
+import { Contacto } from 'src/contactos/entities/contacto.entity';
+import { CampanaContacto } from './entities/campana-contacto.entity';
 
 @Injectable()
 export class CampanasService {
@@ -18,6 +20,12 @@ export class CampanasService {
   constructor(
     @InjectRepository(Campana)
     private readonly campanasRepository: Repository<Campana>,
+
+    @InjectRepository(Contacto)
+    private readonly contactosRepository: Repository<Contacto>,
+
+    @InjectRepository(CampanaContacto)
+    private readonly campanasContactosRepository: Repository<CampanaContacto>,
   ) {}
 
   async create(createCampanaDto: CreateCampanaDto) {
@@ -88,5 +96,64 @@ export class CampanasService {
     this.logger.error(error);
 
     throw new BadRequestException(`Error: ${error.message}`);
+  }
+
+  async iniciar(id: number) {
+    const campana = await this.campanasRepository.findOne({
+      where: { id: Equal(id) },
+      relations: {
+        etiquetas: true,
+      },
+    });
+
+    if (!campana) {
+      throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.etiquetas.length === 0) {
+      throw new BadRequestException(
+        'La campaña debe tener al menos una etiqueta',
+      );
+    }
+
+    if (campana.estado !== Estados.PENDIENTE) {
+      throw new BadRequestException('La campaña no esta pendiente');
+    }
+
+    const contactosConEtiquetas = await this.contactosRepository.find({
+      where: {
+        etiquetas: {
+          id: In(campana.etiquetas.map((etiqueta) => etiqueta.id)),
+        },
+      },
+    });
+
+    if (contactosConEtiquetas.length === 0) {
+      throw new BadRequestException(
+        'No hay contactos con las etiquetas de la campaña',
+      );
+    }
+
+    try {
+      campana.estado = Estados.EN_PROCESO;
+
+      const campanasContactos = [];
+
+      contactosConEtiquetas.forEach((contacto) => {
+        const campanaContacto = this.campanasContactosRepository.create({
+          contactoId: contacto.id,
+        });
+
+        campanasContactos.push(campanaContacto);
+      });
+
+      campana.campanasContactos = campanasContactos;
+
+      await this.campanasRepository.save(campana);
+
+      return campana;
+    } catch (error) {
+      this.manejadorError(error);
+    }
   }
 }

@@ -39,4 +39,9 @@ export class CampanasController {
   remove(@Param('id') id: string) {
     return this.campanasService.remove(+id);
   }
+
+  @Patch(':id/iniciar')
+  iniciar(@Param('id') id: string) {
+    return this.campanasService.iniciar(+id);
+  }
 }

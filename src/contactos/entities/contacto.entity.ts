@@ -1,7 +1,15 @@
+import { CampanaContacto } from 'src/campanas/entities/campana-contacto.entity';
+import { Etiqueta } from 'src/etiquetas/entities/etiqueta.entity';
+import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -39,4 +47,27 @@ export class Contacto {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   actualizadoEn: Date;
+
+  @Column({ name: 'usuario_id', type: 'int' })
+  usuarioId: number;
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.contactos, { nullable: false })
+  @JoinColumn({ name: 'usuario_id' })
+  usuario: Usuario;
+
+  @ManyToMany(() => Etiqueta, (etiqueta) => etiqueta.contactos, {
+    cascade: true,
+  })
+  @JoinTable({
+    name: 'contacto_etiqueta',
+    joinColumn: { name: 'contacto_id' },
+    inverseJoinColumn: { name: 'etiqueta_id' },
+  })
+  etiquetas: Etiqueta[];
+
+  @OneToMany(
+    () => CampanaContacto,
+    (campanaContacto) => campanaContacto.contacto,
+  )
+  campanasContactos: CampanaContacto[];
 }

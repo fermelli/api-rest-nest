@@ -1,5 +1,9 @@
+import { Type } from 'class-transformer';
 import {
+  ArrayMinSize,
+  IsArray,
   IsEmail,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -43,4 +47,13 @@ export class CreateContactoDto {
     message: 'La dirección debe tener menos de 100 caracteres',
   })
   direccion: string;
+
+  @Type(() => Number)
+  @IsNotEmpty({ message: 'El id de usuario es requerido' })
+  @IsInt({ message: 'El id de usuario debe ser un número entero' })
+  usuarioId: number;
+
+  @IsArray({ message: 'Las etiquetas deben ser un arreglo' })
+  @ArrayMinSize(1, { message: 'Debe tener al menos una etiqueta' })
+  etiquetas: any[];
 }

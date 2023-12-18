@@ -194,7 +194,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\"\r\n}",
+							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"daa\": \"etiqutanueva\",\r\n            \"ff\": \"#2b3a1a\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/16\",\r\n    \"fechaFin\": \"2024/01/30\"\r\n}",
+							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/16\",\r\n    \"fechaFin\": \"2024/01/30\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Technician\",\r\n            \"color\": \"#2b4c15\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"orchid\",\r\n            \"color\": \"#524f17\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"#524f17\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,6 +382,25 @@
 							"path": [
 								"campanas",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar Campaña",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/campanas/7/iniciar",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"7",
+								"iniciar"
 							]
 						}
 					},
