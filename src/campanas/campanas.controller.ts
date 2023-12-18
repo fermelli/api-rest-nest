@@ -54,4 +54,12 @@ export class CampanasController {
   finalizar(@Param('id') id: string) {
     return this.campanasService.finalizar(+id);
   }
+
+  @Get(':id/contactos/usuarios/:usuarioId')
+  obtenerContactosDeUsuario(
+    @Param('id') id: string,
+    @Param('usuarioId') usuarioId: string,
+  ) {
+    return this.campanasService.obtenerContactosDeUsuario(+id, +usuarioId);
+  }
 }

@@ -210,4 +210,24 @@ export class CampanasService {
       this.manejadorError(error);
     }
   }
+
+  obtenerContactosDeUsuario(id: number, usuarioId: number) {
+    const contactos = this.campanasRepository.find({
+      where: {
+        id: Equal(id),
+        campanasContactos: {
+          contacto: {
+            usuarioId: Equal(usuarioId),
+          },
+        },
+      },
+      relations: {
+        campanasContactos: {
+          contacto: true,
+        },
+      },
+    });
+
+    return contactos;
+  }
 }
