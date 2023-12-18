@@ -44,4 +44,14 @@ export class CampanasController {
   iniciar(@Param('id') id: string) {
     return this.campanasService.iniciar(+id);
   }
+
+  @Patch(':id/cancelar')
+  cancelar(@Param('id') id: string) {
+    return this.campanasService.cancelar(+id);
+  }
+
+  @Patch(':id/finalizar')
+  finalizar(@Param('id') id: string) {
+    return this.campanasService.finalizar(+id);
+  }
 }

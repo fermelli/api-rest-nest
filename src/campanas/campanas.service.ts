@@ -156,4 +156,58 @@ export class CampanasService {
       this.manejadorError(error);
     }
   }
+
+  async cancelar(id: number) {
+    const campana = await this.campanasRepository.findOne({
+      where: { id: Equal(id) },
+      relations: {
+        campanasContactos: true,
+      },
+    });
+
+    if (!campana) {
+      throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.estado !== Estados.EN_PROCESO) {
+      throw new BadRequestException('La campaña no esta en proceso');
+    }
+
+    try {
+      campana.estado = Estados.CANCELADA;
+
+      await this.campanasRepository.save(campana);
+
+      return campana;
+    } catch (error) {
+      this.manejadorError(error);
+    }
+  }
+
+  async finalizar(id: number) {
+    const campana = await this.campanasRepository.findOne({
+      where: { id: Equal(id) },
+      relations: {
+        campanasContactos: true,
+      },
+    });
+
+    if (!campana) {
+      throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.estado !== Estados.EN_PROCESO) {
+      throw new BadRequestException('La campaña no esta en proceso');
+    }
+
+    try {
+      campana.estado = Estados.FINALIZADA;
+
+      await this.campanasRepository.save(campana);
+
+      return campana;
+    } catch (error) {
+      this.manejadorError(error);
+    }
+  }
 }

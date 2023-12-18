@@ -64,10 +64,7 @@ export class Campana {
   @JoinColumn({ name: 'usuario_id' })
   usuario: Usuario;
 
-  @ManyToMany(() => Etiqueta, (etiqueta) => etiqueta.campanas, {
-    cascade: true,
-    persistence: false,
-  })
+  @ManyToMany(() => Etiqueta, (etiqueta) => etiqueta.campanas)
   @JoinTable({
     name: 'campana_etiqueta',
     joinColumn: { name: 'campana_id' },

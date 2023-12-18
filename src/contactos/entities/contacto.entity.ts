@@ -57,7 +57,6 @@ export class Contacto {
 
   @ManyToMany(() => Etiqueta, (etiqueta) => etiqueta.contactos, {
     cascade: true,
-    persistence: false,
   })
   @JoinTable({
     name: 'contacto_etiqueta',

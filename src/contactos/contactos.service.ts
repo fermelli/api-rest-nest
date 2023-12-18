@@ -7,8 +7,10 @@ import {
 import { CreateContactoDto } from './dto/create-contacto.dto';
 import { UpdateContactoDto } from './dto/update-contacto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Repository } from 'typeorm';
+import { Equal, In, Repository } from 'typeorm';
 import { Contacto } from './entities/contacto.entity';
+import { Etiqueta } from 'src/etiquetas/entities/etiqueta.entity';
+import { ContactoEtiqueta } from 'src/etiquetas/entities/contacto-etiqueta.entity';
 
 @Injectable()
 export class ContactosService {
@@ -17,13 +19,51 @@ export class ContactosService {
   constructor(
     @InjectRepository(Contacto)
     private readonly contactosRepository: Repository<Contacto>,
+
+    @InjectRepository(Etiqueta)
+    private readonly etiquetasRepository: Repository<Etiqueta>,
+
+    @InjectRepository(ContactoEtiqueta)
+    private readonly contactosEtiquetasRepository: Repository<ContactoEtiqueta>,
   ) {}
 
   async create(createContactoDto: CreateContactoDto) {
+    const { etiquetas, ...contactoDatos } = createContactoDto;
+
     try {
-      const contacto = this.contactosRepository.create(createContactoDto);
+      const contacto = this.contactosRepository.create(contactoDatos);
 
       await this.contactosRepository.save(contacto);
+
+      const etiquetasExistentes = await this.etiquetasRepository.find({
+        where: {
+          id: In(
+            etiquetas
+              .filter((etiqueta) => etiqueta.id)
+              .map((etiqueta) => etiqueta.id),
+          ),
+        },
+      });
+
+      const datosEtiquetasNuevas = etiquetas.filter((etiqueta) => !etiqueta.id);
+
+      const etiquetasNuevas =
+        this.etiquetasRepository.create(datosEtiquetasNuevas);
+
+      await this.etiquetasRepository.save(etiquetasNuevas);
+
+      const etiquetasEnBBDD = [...etiquetasExistentes, ...etiquetasNuevas];
+
+      const etiquetasContacto = etiquetasEnBBDD.map((etiqueta) => {
+        return this.contactosEtiquetasRepository.create({
+          contactoId: contacto.id,
+          etiquetaId: etiqueta.id,
+        });
+      });
+
+      await this.contactosEtiquetasRepository.save(etiquetasContacto);
+
+      contacto.etiquetas = etiquetasEnBBDD;
 
       return contacto;
     } catch (error) {
