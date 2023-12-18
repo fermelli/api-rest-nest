@@ -3,12 +3,15 @@ import {
   Injectable,
   Logger,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Equal, Repository } from 'typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CrearUsuarioDto } from './dtos/crear-usuario.dto';
 import { ActualizarUsuarioDto } from './dtos/actualizar-usuario.dto';
+import { AutenticacionGuard } from 'src/autenticacion/guards/autenticacion.guard';
+import { hashSync } from 'bcrypt';
 
 @Injectable()
 export class UsuariosService {
@@ -19,6 +22,7 @@ export class UsuariosService {
     private readonly usuariosRepository: Repository<Usuario>,
   ) {}
 
+  @UseGuards(AutenticacionGuard)
   async findAll(withDeleted: boolean) {
     const usuarios = await this.usuariosRepository.find({
       withDeleted,
@@ -29,6 +33,8 @@ export class UsuariosService {
 
   async create(crearUsuarioDto: CrearUsuarioDto) {
     try {
+      crearUsuarioDto.password = hashSync(crearUsuarioDto.password, 10);
+
       const usuario = this.usuariosRepository.create(crearUsuarioDto);
 
       await this.usuariosRepository.save(usuario);
@@ -111,5 +117,14 @@ export class UsuariosService {
     } catch (error) {
       this.manejadorError(error);
     }
+  }
+
+  async buscarPorCorreoElectronico(correoElectronico: string) {
+    const usuario = await this.usuariosRepository.findOne({
+      where: { correoElectronico: Equal(correoElectronico) },
+      withDeleted: true,
+    });
+
+    return usuario;
   }
 }
