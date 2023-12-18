@@ -20,7 +20,6 @@ export class ContactosService {
   ) {}
 
   async create(createContactoDto: CreateContactoDto) {
-    console.log(createContactoDto);
     try {
       const contacto = this.contactosRepository.create(createContactoDto);
 

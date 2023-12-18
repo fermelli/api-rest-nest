@@ -9,7 +9,9 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import { CreateEtiquetaConIdDto } from 'src/etiquetas/dto/create-etiqueta-con-id.dto';
 
 export class CreateContactoDto {
   @IsNotEmpty({ message: 'Los nombres son requeridos' })
@@ -53,7 +55,9 @@ export class CreateContactoDto {
   @IsInt({ message: 'El id de usuario debe ser un número entero' })
   usuarioId: number;
 
+  @Type(() => CreateEtiquetaConIdDto)
   @IsArray({ message: 'Las etiquetas deben ser un arreglo' })
   @ArrayMinSize(1, { message: 'Debe tener al menos una etiqueta' })
-  etiquetas: any[];
+  @ValidateNested()
+  etiquetas: CreateEtiquetaConIdDto[];
 }

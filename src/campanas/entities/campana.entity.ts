@@ -66,6 +66,7 @@ export class Campana {
 
   @ManyToMany(() => Etiqueta, (etiqueta) => etiqueta.campanas, {
     cascade: true,
+    persistence: false,
   })
   @JoinTable({
     name: 'campana_etiqueta',

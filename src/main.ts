@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { UnprocessableEntityException, ValidationPipe } from '@nestjs/common';
 import { UnprocessableEntityExceptionFilter } from './common/exception-filter/unprocessable-entity-exception.filter';
+import { formatearErrores } from './utils';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,12 +18,9 @@ async function bootstrap() {
       whitelist: true,
       exceptionFactory: (errors) => {
         console.log(errors);
-
         const mensajesErrores = {};
 
-        errors.forEach((error) => {
-          mensajesErrores[error.property] = Object.values(error.constraints);
-        });
+        formatearErrores(mensajesErrores, errors);
 
         return new UnprocessableEntityException(mensajesErrores);
       },
