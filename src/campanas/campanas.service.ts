@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   Logger,
   NotFoundException,
@@ -30,10 +31,11 @@ export class CampanasService {
     private readonly campanasContactosRepository: Repository<CampanaContacto>,
   ) {}
 
-  async create(createCampanaDto: CreateCampanaDto) {
+  async create(createCampanaDto: CreateCampanaDto, usuarioId: number) {
     try {
       const campana = this.campanasRepository.create({
         estado: Estados.PENDIENTE,
+        usuarioId,
         ...createCampanaDto,
       });
 
@@ -63,7 +65,11 @@ export class CampanasService {
     return campana;
   }
 
-  async update(id: number, updateCampanaDto: UpdateCampanaDto) {
+  async update(
+    id: number,
+    updateCampanaDto: UpdateCampanaDto,
+    usuarioId: number,
+  ) {
     const campana = await this.campanasRepository.preload({
       id,
       ...updateCampanaDto,
@@ -71,6 +77,10 @@ export class CampanasService {
 
     if (!campana) {
       throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.usuarioId !== usuarioId) {
+      throw new ForbiddenException('La campaña no pertenece al usuario');
     }
 
     try {
@@ -82,8 +92,12 @@ export class CampanasService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: number, usuarioId: number) {
     const campana = await this.findOne(id);
+
+    if (campana.usuarioId !== usuarioId) {
+      throw new ForbiddenException('La campaña no pertenece al usuario');
+    }
 
     try {
       await this.campanasRepository.remove(campana);
@@ -100,7 +114,7 @@ export class CampanasService {
     throw new BadRequestException(`Error: ${error.message}`);
   }
 
-  async iniciar(id: number) {
+  async iniciar(id: number, usuarioId: number) {
     const campana = await this.campanasRepository.findOne({
       where: { id: Equal(id) },
       relations: {
@@ -110,6 +124,10 @@ export class CampanasService {
 
     if (!campana) {
       throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.usuarioId !== usuarioId) {
+      throw new ForbiddenException('La campaña no pertenece al usuario');
     }
 
     if (campana.etiquetas.length === 0) {
@@ -163,13 +181,17 @@ export class CampanasService {
     }
   }
 
-  async cancelar(id: number) {
+  async cancelar(id: number, usuarioId: number) {
     const campana = await this.campanasRepository.findOne({
       where: { id: Equal(id) },
     });
 
     if (!campana) {
       throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.usuarioId !== usuarioId) {
+      throw new ForbiddenException('La campaña no pertenece al usuario');
     }
 
     if (campana.estado !== Estados.EN_PROCESO) {
@@ -187,13 +209,17 @@ export class CampanasService {
     }
   }
 
-  async finalizar(id: number) {
+  async finalizar(id: number, usuarioId: number) {
     const campana = await this.campanasRepository.findOne({
       where: { id: Equal(id) },
     });
 
     if (!campana) {
       throw new NotFoundException(`Campaña con id ${id} no encontrado`);
+    }
+
+    if (campana.usuarioId !== usuarioId) {
+      throw new ForbiddenException('La campaña no pertenece al usuario');
     }
 
     if (campana.estado !== Estados.EN_PROCESO) {

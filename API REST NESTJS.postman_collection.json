@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "0005eb6f-7f77-48ec-b5ef-183c134f4662",
+		"_postman_id": "f2ed2dd3-2d82-49f4-91d4-9e7cf2f8586d",
 		"name": "API REST NESTJS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8046053"
+		"_exporter_id": "23398434",
+		"_collection_link": "https://martian-equinox-531321.postman.co/workspace/Team-Workspace~c3a1dd85-3f13-4bcf-8495-87a269f3a38e/collection/23398434-f2ed2dd3-2d82-49f4-91d4-9e7cf2f8586d?action=share&source=collection_link&creator=23398434"
 	},
 	"item": [
 		{
@@ -47,18 +48,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_url}}/usuarios?withDeleted=0",
+							"raw": "{{api_url}}/usuarios",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"usuarios"
-							],
-							"query": [
-								{
-									"key": "withDeleted",
-									"value": "0"
-								}
 							]
 						}
 					},
@@ -70,13 +65,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/usuarios/4",
+							"raw": "{{api_url}}/usuarios/1",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"usuarios",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -194,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"system\",\r\n            \"color\": \"#4a1d2f\",\r\n            \"creadoEn\": \"2023-12-18T02:22:14.607Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"nombre\": \"Agent\",\r\n            \"color\": \"#230e7f\",\r\n            \"creadoEn\": \"2023-12-18T02:30:39.706Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"connecting\",\r\n            \"color\": \"#714877\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"digital\",\r\n            \"color\": \"#4a5609\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +300,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\": 1,\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/31\",\r\n    \"fechaFin\": \"2024/01/30\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"system\",\r\n            \"color\": \"#4a1d2f\",\r\n            \"creadoEn\": \"2023-12-18T02:22:14.607Z\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"nombre\": \"Agent\",\r\n            \"color\": \"#230e7f\",\r\n            \"creadoEn\": \"2023-12-18T02:30:39.706Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"nombre\": \"{{$randomLoremWords}}\",\r\n    \"descripcion\": \"{{$randomLoremWords}}\",\r\n    \"banner\": \"{{$randomImageUrl}}\",\r\n    \"fechaInicio\": \"2023/12/31\",\r\n    \"fechaFin\": \"2024/01/30\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"connecting\",\r\n            \"color\": \"#714877\",\r\n            \"creadoEn\": \"2023-12-18T23:18:43.803Z\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"digital\",\r\n            \"color\": \"#4a5609\",\r\n            \"creadoEn\": \"2023-12-18T23:18:45.366Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWords}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWords}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -393,13 +388,13 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/campanas/9/iniciar",
+							"raw": "{{api_url}}/campanas/5/iniciar",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"campanas",
-								"9",
+								"5",
 								"iniciar"
 							]
 						}
@@ -412,13 +407,13 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/campanas/3/cancelar",
+							"raw": "{{api_url}}/campanas/4/cancelar",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"campanas",
-								"3",
+								"4",
 								"cancelar"
 							]
 						}
@@ -450,16 +445,44 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/campanas/1/contactos/usuarios/1",
+							"raw": "{{api_url}}/campanas/2/contactos/usuarios",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"campanas",
-								"1",
+								"2",
 								"contactos",
-								"usuarios",
-								"1"
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DarSeguimientoCampanaContacto",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoAccion\": \"llamada\",\r\n    \"resultadoAccion\": \"exitosa\",\r\n    \"fechaAccion\": \"2023/12/18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/campanas/campana-contacto/2/usuarios",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"campanas",
+								"campana-contacto",
+								"2",
+								"usuarios"
 							]
 						}
 					},
@@ -579,6 +602,65 @@
 			]
 		},
 		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Iniciar Sesión",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\": \"Sanford_Becker55@yahoo.com\",\r\n    \"password\": \"Password123$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/autenticacion/iniciar-sesion",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"iniciar-sesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrarse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"fermelli\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"password\": \"Password123$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/autenticacion/registrarse",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"registrarse"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Hello World!",
 			"request": {
 				"method": "GET",
@@ -597,6 +679,16 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlkIjoxLCJub21icmUiOiJMZXh1c19EaWNrZW5zIiwiY29ycmVvRWxlY3Ryb25pY28iOiJTYW5mb3JkX0JlY2tlcjU1QHlhaG9vLmNvbSIsImNyZWFkb0VuIjoiMjAyMy0xMi0xOFQyMzoxNzozMS40MjZaIiwiYWN0dWFsaXphZG9FbiI6IjIwMjMtMTItMTlUMDE6NDI6NDAuODc4WiIsImVsaW1pbmFkb0VuIjpudWxsLCJyb2xlcyI6WyJhZG1pbmlzdHJhZG9yIiwiY29uc3VsdG9yIl0sImlhdCI6MTcwMjk1MDE2NywiZXhwIjoxNzAyOTY0NTY3fQ.N334jPxs3JseVm79NeivqJwyCLwHWtMcq7JObCcOEUQ",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",

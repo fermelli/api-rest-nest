@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   Logger,
   NotFoundException,
@@ -27,11 +28,14 @@ export class ContactosService {
     private readonly contactosEtiquetasRepository: Repository<ContactoEtiqueta>,
   ) {}
 
-  async create(createContactoDto: CreateContactoDto) {
+  async create(createContactoDto: CreateContactoDto, usuarioId: number) {
     const { etiquetas, ...contactoDatos } = createContactoDto;
 
     try {
-      const contacto = this.contactosRepository.create(contactoDatos);
+      const contacto = this.contactosRepository.create({
+        usuarioId,
+        ...contactoDatos,
+      });
 
       await this.contactosRepository.save(contacto);
 
@@ -92,7 +96,11 @@ export class ContactosService {
     return contacto;
   }
 
-  async update(id: number, updateContactoDto: UpdateContactoDto) {
+  async update(
+    id: number,
+    updateContactoDto: UpdateContactoDto,
+    usuarioId: number,
+  ) {
     const contacto = await this.contactosRepository.preload({
       id,
       ...updateContactoDto,
@@ -100,6 +108,10 @@ export class ContactosService {
 
     if (!contacto) {
       throw new NotFoundException(`Contacto con id ${id} no encontrado`);
+    }
+
+    if (contacto.usuarioId !== usuarioId) {
+      throw new ForbiddenException('El contacto no pertenece al usuario');
     }
 
     try {
@@ -111,8 +123,12 @@ export class ContactosService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: number, usuarioId: number) {
     const contacto = await this.findOne(id);
+
+    if (contacto.usuarioId !== usuarioId) {
+      throw new ForbiddenException('El contacto no pertenece al usuario');
+    }
 
     try {
       await this.contactosRepository.remove(contacto);

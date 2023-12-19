@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ContactosModule } from './contactos/contactos.module';
 import { CampanasModule } from './campanas/campanas.module';
 import { EtiquetasModule } from './etiquetas/etiquetas.module';
+import { AutenticacionModule } from './autenticacion/autenticacion.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { EtiquetasModule } from './etiquetas/etiquetas.module';
     ContactosModule,
     CampanasModule,
     EtiquetasModule,
+    AutenticacionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,14 +10,19 @@ import {
 import { ContactosService } from './contactos.service';
 import { CreateContactoDto } from './dto/create-contacto.dto';
 import { UpdateContactoDto } from './dto/update-contacto.dto';
+import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { ObtenerUsuario } from 'src/autenticacion/decorators/obtener-usuario.decorator';
 
 @Controller('contactos')
 export class ContactosController {
   constructor(private readonly contactosService: ContactosService) {}
 
   @Post()
-  create(@Body() createContactoDto: CreateContactoDto) {
-    return this.contactosService.create(createContactoDto);
+  create(
+    @Body() createContactoDto: CreateContactoDto,
+    @ObtenerUsuario() usuario: Usuario,
+  ) {
+    return this.contactosService.create(createContactoDto, usuario.id);
   }
 
   @Get()
@@ -34,12 +39,13 @@ export class ContactosController {
   update(
     @Param('id') id: string,
     @Body() updateContactoDto: UpdateContactoDto,
+    @ObtenerUsuario() usuario: Usuario,
   ) {
-    return this.contactosService.update(+id, updateContactoDto);
+    return this.contactosService.update(+id, updateContactoDto, usuario.id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.contactosService.remove(+id);
+  remove(@Param('id') id: string, @ObtenerUsuario() usuario: Usuario) {
+    return this.contactosService.remove(+id, usuario.id);
   }
 }

@@ -19,8 +19,6 @@ export class UsuariosController {
 
   @Get()
   findAll(@Query('withDeleted', ParseBoolPipe) withDeleted: boolean) {
-    console.log(typeof withDeleted);
-
     return this.usuariosService.findAll(withDeleted);
   }
 
