@@ -86,6 +86,7 @@ export class ContactosService {
       where: { id: Equal(id) },
       relations: {
         usuario: true,
+        etiquetas: true,
       },
     });
 
@@ -101,10 +102,8 @@ export class ContactosService {
     updateContactoDto: UpdateContactoDto,
     usuarioId: number,
   ) {
-    const contacto = await this.contactosRepository.preload({
-      id,
-      ...updateContactoDto,
-    });
+    const { etiquetas, ...contactoDatos } = updateContactoDto;
+    const contacto = await this.findOne(id);
 
     if (!contacto) {
       throw new NotFoundException(`Contacto con id ${id} no encontrado`);
@@ -115,9 +114,44 @@ export class ContactosService {
     }
 
     try {
-      await this.contactosRepository.save(contacto);
+      const idsEtiquetasEnviadas = etiquetas
+        .filter((etiqueta) => etiqueta.id)
+        .map((etiqueta) => etiqueta.id);
+      const idsEtiquetasPreexistentes = contacto.etiquetas.map(
+        (etiqueta) => etiqueta.id,
+      );
+      const idsEtiquetasQueNoEstanEnviadas = idsEtiquetasPreexistentes.filter(
+        (id) => !idsEtiquetasEnviadas.includes(id),
+      );
 
-      return contacto;
+      idsEtiquetasQueNoEstanEnviadas.forEach(async (id) => {
+        await this.contactosEtiquetasRepository.delete({
+          contactoId: contacto.id,
+          etiquetaId: id,
+        });
+      });
+
+      const datosEtiquetasNuevas = etiquetas.filter((etiqueta) => !etiqueta.id);
+
+      const etiquetasNuevas =
+        this.etiquetasRepository.create(datosEtiquetasNuevas);
+
+      await this.etiquetasRepository.save(etiquetasNuevas);
+
+      const etiquetasContacto = etiquetasNuevas.map((etiqueta) => {
+        return this.contactosEtiquetasRepository.create({
+          contactoId: contacto.id,
+          etiquetaId: etiqueta.id,
+        });
+      });
+
+      await this.contactosEtiquetasRepository.save(etiquetasContacto);
+
+      await this.contactosRepository.update(id, contactoDatos);
+
+      const contactoActualizado = await this.findOne(id);
+
+      return contactoActualizado;
     } catch (error) {
       this.manejadorError(error);
     }

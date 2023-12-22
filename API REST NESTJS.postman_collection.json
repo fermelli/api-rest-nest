@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"connecting\",\r\n            \"color\": \"#714877\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"digital\",\r\n            \"color\": \"#4a5609\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWord}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"connecting\",\r\n            \"color\": \"#714877\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"digital\",\r\n            \"color\": \"#4a5609\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWords}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWords}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -214,13 +214,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/contactos/4",
+							"raw": "{{api_url}}/contactos/1",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"contactos",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -233,7 +233,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\"\r\n}",
+							"raw": "{\r\n    \"nombres\": \"{{$randomFirstName}}\",\r\n    \"apellidos\": \"{{$randomLastName}}\",\r\n    \"telefonoCelular\": \"{{$randomPhoneNumber}}\",\r\n    \"correoElectronico\": \"{{$randomEmail}}\",\r\n    \"direccion\": \"{{$randomStreetAddress}}\",\r\n    \"etiquetas\": [\r\n        // {\r\n        //     \"id\": 1,\r\n        //     \"nombre\": \"connecting\",\r\n        //     \"color\": \"#714877\",\r\n        //     \"creadoEn\": \"2023-12-18T23:18:43.803Z\"\r\n        // },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"digital\",\r\n            \"color\": \"#4a5609\",\r\n            \"creadoEn\": \"2023-12-18T23:18:45.366Z\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"nombre\": \"Metrics\",\r\n            \"color\": \"#567c6d\",\r\n            \"creadoEn\": \"2023-12-18T23:26:23.649Z\"\r\n        },\r\n        {\r\n            \"id\": 115,\r\n            \"nombre\": \"XSS invoice Squares Taka\",\r\n            \"color\": \"#504f26\",\r\n            \"creadoEn\": \"2023-12-22T12:37:49.346Z\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWords}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        },\r\n        {\r\n            \"nombre\": \"{{$randomWords}}\",\r\n            \"color\": \"{{$randomHexColor}}\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,13 +241,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_url}}/contactos/5",
+							"raw": "{{api_url}}/contactos/1",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"contactos",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -657,6 +657,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Usuario Autenticado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/autenticacion/usuario-autenticado",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"autenticacion",
+								"usuario-autenticado"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -684,7 +702,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlkIjoxLCJub21icmUiOiJMZXh1c19EaWNrZW5zIiwiY29ycmVvRWxlY3Ryb25pY28iOiJTYW5mb3JkX0JlY2tlcjU1QHlhaG9vLmNvbSIsImNyZWFkb0VuIjoiMjAyMy0xMi0xOFQyMzoxNzozMS40MjZaIiwiYWN0dWFsaXphZG9FbiI6IjIwMjMtMTItMTlUMDE6NDI6NDAuODc4WiIsImVsaW1pbmFkb0VuIjpudWxsLCJyb2xlcyI6WyJhZG1pbmlzdHJhZG9yIiwiY29uc3VsdG9yIl0sImlhdCI6MTcwMjk1MDE2NywiZXhwIjoxNzAyOTY0NTY3fQ.N334jPxs3JseVm79NeivqJwyCLwHWtMcq7JObCcOEUQ",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlkIjoxLCJub21icmUiOiJMZXh1c19EaWNrZW5zIiwiY29ycmVvRWxlY3Ryb25pY28iOiJTYW5mb3JkX0JlY2tlcjU1QHlhaG9vLmNvbSIsImNyZWFkb0VuIjoiMjAyMy0xMi0xOFQyMzoxNzozMS40MjZaIiwiYWN0dWFsaXphZG9FbiI6IjIwMjMtMTItMTlUMDE6NDI6NDAuODc4WiIsImVsaW1pbmFkb0VuIjpudWxsLCJyb2xlcyI6WyJhZG1pbmlzdHJhZG9yIiwiY29uc3VsdG9yIl0sImlhdCI6MTcwMzI0NzI2MSwiZXhwIjoxNzAzMjYxNjYxfQ.a1ODU1XuM0jNVNDOd4ZO-r5QHWmq-TDI4gK73K20lvw",
 				"type": "string"
 			}
 		]
