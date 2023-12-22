@@ -124,6 +124,13 @@ export class ContactosService {
         (id) => !idsEtiquetasEnviadas.includes(id),
       );
 
+      const etiquetasAgregadas = etiquetas.filter(
+        (etiqueta) =>
+          !idsEtiquetasPreexistentes.includes(etiqueta.id) && etiqueta.id,
+      );
+
+      console.log({ etiquetasAgregadas });
+
       idsEtiquetasQueNoEstanEnviadas.forEach(async (id) => {
         await this.contactosEtiquetasRepository.delete({
           contactoId: contacto.id,
@@ -144,8 +151,15 @@ export class ContactosService {
           etiquetaId: etiqueta.id,
         });
       });
+      const etiquetasAgregadasContacto = etiquetasAgregadas.map((etiqueta) => {
+        return this.contactosEtiquetasRepository.create({
+          contactoId: contacto.id,
+          etiquetaId: etiqueta.id,
+        });
+      });
 
       await this.contactosEtiquetasRepository.save(etiquetasContacto);
+      await this.contactosEtiquetasRepository.save(etiquetasAgregadasContacto);
 
       await this.contactosRepository.update(id, contactoDatos);
 
