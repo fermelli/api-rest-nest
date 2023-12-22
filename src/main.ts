@@ -29,6 +29,8 @@ async function bootstrap() {
 
   app.useGlobalFilters(new UnprocessableEntityExceptionFilter());
 
+  app.enableCors();
+
   await app.listen(port, host, () => {
     console.log(`El servidor se esta ejecutando en http://${host}:${port}`);
   });
